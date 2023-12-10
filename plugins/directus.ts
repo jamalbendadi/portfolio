@@ -1,6 +1,6 @@
-import { BaseStorage, Directus } from '@directus/sdk'
+import { createDirectus, authentication, rest, readItem, readItems, readMe, type AuthenticationData } from '@directus/sdk'
+import { c } from '@directus/sdk/dist/index-7ec1f729'
 import { useAuth } from '~~/store/auth'
-
 // Make sure you review the Directus SDK documentation for more information
 // https://docs.directus.io/reference/sdk.html
 
@@ -10,7 +10,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
   // Create a new storage class to use with the SDK
   // Needed for the SSR to play nice with the SDK
-  class CookieStorage extends BaseStorage {
+  /*class CookieStorage extends BaseStorage {
     deletedKeys = new Set<string>()
     get(key: string) {
       if (this.deletedKeys.has(key)) return null
@@ -27,41 +27,41 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       const cookie = useCookie(key)
       return (cookie.value = null)
     }
-  }
+  }*/
 
   // Create a new instance of the SDK
-  const directus = new Directus(directusUrl, {
+  /*const directus = new Directus(directusUrl, {
     storage: new CookieStorage(),
     auth: {
       mode: 'json',
     },
-  })
-
-  // We're calling the useAuth composable here because we need to define Directus as a plugin first
-  const auth = useAuth()
-
-  const token = await directus.auth.token
-  const side = process.server ? 'server' : 'client'
-
-  // If there's a token but we don't have a user, fetch the user
-  if (!auth.isLoggedIn && token) {
-    console.log('Token found, fetching user from ' + side)
-    console.log('Token is', token)
-    try {
-      await auth.getUser()
-      console.log('User fetched succeessfully from ' + side)
-    } catch (e) {
-      console.log('Failed to fetch user from ' + side, e.message)
-    }
-  }
-
-  // If the user is logged in but there's no token, reset the auth store {
-  if (auth.isLoggedIn && !token) {
-    console.log('Token not found, resetting auth store from ' + side)
-    auth.$reset()
-  }
+  })*/
+  const cookie = useCookie('directus_auth')
+  const directus = createDirectus(directusUrl)
+    .with(authentication('cookie', {
+      //autoRefresh: true,
+      storage: {
+        // cookie storage
+        get: () => {
+          try {
+            if(!cookie.value) return null
+            const auth = typeof cookie.value === 'string' ? JSON.parse(cookie.value) : cookie.value
+            return auth
+          }
+          catch (e) {
+            console.log('Error parsing cookie', e)
+            console.log()
+          }
+          return null
+        },
+        set: (value: AuthenticationData | null) => {
+          cookie.value = JSON.stringify(value)
+        },
+      },
+    }))
+    .with(rest())
 
   return {
-    provide: { directus },
+    provide: { directus, readItem, readItems, readMe },
   }
 })
