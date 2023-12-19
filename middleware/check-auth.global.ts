@@ -3,8 +3,6 @@ const msg =
   'You must be logged in to view this page. Redirecting back to home page.'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  //if (!process.client) return
-  console.log(process.client)
   const { $directus } = useNuxtApp()
   const auth = useAuth()
 

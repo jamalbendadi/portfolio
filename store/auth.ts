@@ -55,7 +55,7 @@ export const useAuth = defineStore('auth', {
 
         // Remove the auth_expires_at cookie that is left over from the logout
         const cookie = useCookie('directus_auth')
-        const auth: AuthenticationData = JSON.parse(cookie.value || '{}')
+        const auth: AuthenticationData = typeof cookie.value === 'string' ? JSON.parse(cookie.value) : cookie.value
         if(!!Object.keys(auth).length) {
           auth.expires_at = null
           cookie.value = JSON.stringify(auth)
