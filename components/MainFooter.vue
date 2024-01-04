@@ -1,18 +1,8 @@
 <template>
     <footer
         class="relative rounded-tr rounded-bl md:flex md:justify-between bg-gray-50 dark:bg-gray-800 rounded-tl-3xl rounded-br-3xl">
-        <div class="p-8">
-            <h1 class="text-4xl font-extrabold dark:text-white">
-                {{ title }}
-            </h1>
-            <div class="mt-4 text-gray-700 dark:text-gray-200">
-                <p>Created by Bryant Gillespie</p>
-                <NuxtLink to="https://twitter.com/bryantgillespie" target="_blank">@bryantgillespie</NuxtLink>
-            </div>
-        </div>
-
-        <div class="flex items-center justify-end p-4 space-x-2">
-            <NuxtLink to="https://github.com/bryantgillespie/nuxt3-directus-starter" target="_blank"
+            <!--<
+                NuxtLink to="https://github.com/bryantgillespie/nuxt3-directus-starter" target="_blank"
                 class="p-1 dark:text-primary-200 dark:hover:text-primary-400 text-primary-700 hover:text-primary-900">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -20,6 +10,7 @@
                     </path>
                 </svg>
             </NuxtLink>
+        -->
             <ExamplesDarkModeToggle
                 class="dark:text-primary-200 dark:hover:text-primary-400 text-primary-700 hover:text-primary-900" />
         </div>

@@ -1,6 +1,6 @@
 <template>
     <header
-        class="relative overflow-hidden rounded-tr rounded-bl bg-gradient-to-br from-slate-900 to-slate-700 shadow-primary-600 rounded-tl-3xl rounded-br-3xl">
+        class="fixed z-50 w-full overflow-hidden rounded-bl bg-gradient-to-br from-slate-900 to-slate-700 shadow-primary-600 rounded-br-3xl">
         <div class="md:flex md:justify-between">
             <h1 class="px-8 py-6 text-4xl font-extrabold text-white">
                 {{ title }}

@@ -1,23 +1,25 @@
 <template>
-  <div id="examples" class="relative flex-1 divide-y-2 divide-gray-200 dark:divide-gray-800">
-    <h2 class="pb-6 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-700 to-pink-600">
-      Examples of Functionality
-    </h2>
-    <ExamplesContent id="content" class="py-12" />
-    <ExamplesAuth id="authentication" class="py-12" />
-    <ExamplesApiRoutes id="api" class="py-12" />
-  </div>
-  <div id="components" class="relative flex-1 divide-y-2 divide-gray-200 dark:divide-gray-800">
-    <h2 class="pb-6 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-700 to-pink-600">
-      Demo of Components
-    </h2>
-    <ExamplesComponents />
-  </div>
+    <div class="relative pb-24">
+        <div class="pt-12">
+            <Landing :imgUrl="imgUrl" :socials="socials" :srcs="srcs"/>
+        </div>
+        <div class="max-w-6xl px-6 mx-auto space-y-8">
+            <h1 class="section-title ml-14">Works</h1>
+            <PortfolioComponent />
+        </div>
+    </div>
 </template>
-
-<script setup>
-const title = 'Directus & Nuxt 3 Starter'
-useHead({
-  title: title,
-})
+<script setup lang="ts">
+import PortfolioComponent from '~/components/PortfolioComponent.vue'
+import { readItems } from '@directus/sdk';
+const { $directus } = useNuxtApp()
+const { fileUrl } = useFiles()
+const landing_img = await $directus.request(readItems('images', {
+    filter: { name: { _eq: 'landing_page_image' } }
+}))
+const socials = await $directus.request(readItems('socials'))
+let srcs = (await $directus.request(readItems('skills')))
+    .filter((skill: any) => skill.logo)
+    .map((skill: any) => skill.logo ? fileUrl(skill.logo) : null)
+const imgUrl = ref(fileUrl(landing_img[0].image))
 </script>
