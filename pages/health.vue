@@ -1,0 +1,1 @@
+<template><h1 class="section-title">app is healthy</h1></template>

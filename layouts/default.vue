@@ -1,5 +1,5 @@
 <template>
-  <div ref="background" class="comp z-0 fixed" />
+  <div ref="background" class="fixed comp" style="z-index: -99;"/>
   <div class="" @pointermove="update">
     <div>
       <!--<MainHeader title="Jamal Bendadi, Software Engineer and AI enthusiast" />-->
