@@ -1,16 +1,17 @@
 <template>
-    <div class="slider h-24 m-auto overflow-hidden relative max-w-4xl rounded-xl" v-if="srcs.length">
-        <div class="slide-track" :style="`--img-count: ${srcs.length}`">
+    <div class="slider md:h-24 h-12 m-auto overflow-hidden relative w-full" v-if="srcs.length">
+        <div class="slide-track" :style="`--img-count: ${srcs.length}; --img-w: ${imgWidth}px`">
             <div class="slide bg-primary-100" v-for="(src, index) in srcs" :key="index">
-                <img :src="src" height="100" width="250" alt="" />
+                <img :src="src" :height="`${100 / (isMediumScreen ? 1 : 2)}`" :width="imgWidth" alt="" />
             </div>
             <div class="slide bg-primary-100" v-for="(src, index) in srcs" :key="index">
-                <img :src="src" height="100" width="250" alt="" />
+                <img :src="src" :height="`${100 / (isMediumScreen ? 1 : 2)}`" :width="imgWidth" alt="" />
             </div>
         </div>
     </div>
 </template>
 <script setup>
+const isMediumScreen = useMediaQuery('(min-width: 768px)');
 const props = defineProps({
     srcs: {
         type: Array,
@@ -19,7 +20,7 @@ const props = defineProps({
 })
 const srcs = toRef(props, 'srcs', [])
 // get all src links from the template and put them in an array
-
+const imgWidth = computed(() => 250 / (isMediumScreen.value ? 1 : 2))
 </script>
 <style scoped>
 
@@ -31,7 +32,7 @@ const srcs = toRef(props, 'srcs', [])
 .slider {	
 	&::before,
 	&::after {
-        background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+        background: linear-gradient(to right,  rgb(8, 6, 6) 0%,rgba(255,255,255,0) 100%);
 		content: "";
 		height: 100px;
 		position: absolute;
@@ -50,11 +51,12 @@ const srcs = toRef(props, 'srcs', [])
 	}
 	
 	.slide-track {
-        --img-width: 250px;
-        --max-img: 7;
+        --img-width: var(--img-w, 250);
+        --max-img: var(--img-count, 7);
 		animation: scroll 20s linear infinite;
 		display: flex;
 		width: calc(var(--img-width) * calc(var(--max-img) * 2));
 	}
 }
+
 </style>

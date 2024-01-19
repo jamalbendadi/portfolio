@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    @apply bg-black;
+}
+html, body { max-width: 100%; overflow-x: hidden; }
+
+
 h1.section-title {    
     @apply flex text-6xl pt-4 overflow-hidden font-extrabold text-transparent bg-clip-text text-white;
 }

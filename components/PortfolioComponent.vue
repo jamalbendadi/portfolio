@@ -1,19 +1,22 @@
 <template>
+    <h1 class="section-title ml-14" v-if="works?.length ?? 0 > 0">Works</h1>
     <div v-show="loading" class="text-white text-center bg-purple-950 p-4 block w-32 rounded-lg shadow-inner mx-auto">
         <span class="section-title font-bold">Loading...</span>
     </div>
     <div v-show="!loading">
-        <div v-for="(work, index) in  works" :key="work.id" v-intersection-observer="(i) => onIntersectionObserver(i, work)"
-            :class="{
+        <div v-for="(work, index) in  works" :key="work.id"
+            v-intersection-observer="(i) => onIntersectionObserver(i, work)">
+            <div :class="[{
                 'animate-show': work.isVisible,
                 'animate-hide-left': index % 2 == 0,
                 'animate-hide-right': index % 2 != 0
-            }">
-            <h2 class="text-2xl text-white text-center font-bold mb-3">{{ work.title }}</h2>
+            }]">
+                <h2 class="text-2xl text-white text-center font-bold mb-3">{{ work.title }}</h2>
 
-            <SwiperCarousel :images="work.image" class="delay-200" />
-            <div v-html="work.description" class="text-white mt-5 delay-400" />
-            <div class="h-[1px] mt-6 mb-6" />
+                <SwiperCarousel :images="work.image" class="delay-200" />
+                <div v-html="work.description" class="text-white mt-5 delay-400" />
+                <div class="h-[1px] mt-6 mb-6" />
+            </div>
         </div>
     </div>
 </template>
@@ -22,7 +25,7 @@ import SwiperCarousel from '~/components/SwiperCarousel.vue'
 import { vIntersectionObserver } from '@vueuse/components'
 import { readItems } from '@directus/sdk';
 const { $directus } = useNuxtApp()
-const [{ fileUrl }, { performAsync }] = [useFiles(), useAsyncLoader()]
+const [{ fileUrl }, { performAsyncWithResultOrNull }] = [useFiles(), useAsyncLoader()]
 const [works, loading] = [ref([]), ref(true)]
 
 const onIntersectionObserver = (observer, work) => {
@@ -30,18 +33,14 @@ const onIntersectionObserver = (observer, work) => {
     work.isVisible = ref(observer[0].isIntersecting)
 }
 
-works.value = await performAsync(loading,
-    $directus.request(readItems('works', { fields: ['*', 'image.images_id.name', 'image.images_id.image'] }))
-)
+works.value = await performAsyncWithResultOrNull(
+    $directus.request(readItems('works', { fields: ['*', 'image.images_id.name', 'image.images_id.image'] })),
+    loading
+) ?? []
 works.value.forEach(work => {
     work.image = work.image.map(i => ({ url: fileUrl(i.images_id.image), alt: i.images_id.description }))
     work.isVisible = ref(false)
 })
-const classObj = ref({
-    'animate-hide-left': false,
-    'animate-hide-right': false,
-    'animate-show': false
-},true)
 </script>
 <style scoped>
 @media (prefers-reduced-motion: reduce) {
@@ -73,5 +72,4 @@ const classObj = ref({
     filter: blur(0);
     transform: translateX(0) translateY(0);
 }
-
 </style>
