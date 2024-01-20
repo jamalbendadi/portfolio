@@ -1,5 +1,5 @@
 <template>
-  <button @click="handleClick" :type="type" :class="[
+  <component :is="elementType" target="_blank" :href="href" :type="type" :class="[
     'btn',
     {
       'btn-default': variant === 'default',
@@ -9,14 +9,13 @@
     },
   ]">
     <slot />
-  </button>
+  </component>
 </template>
 
 <script setup lang="ts">
-const router = useRouter()
 const props = defineProps({
   type: {
-    type: String,
+    type: String as PropType<'button' | 'submit' | 'reset'>,
     default: 'button',
   },
   variant: {
@@ -25,13 +24,13 @@ const props = defineProps({
   },
   href: {
     type: String,
-    required: false, 
+    required: false,
   },
 })
-const handleClick = () => {
-  if(!props.href) return
-  router.push(props.href)
-}
+const elementType = computed(() => {
+  if (props.href) return 'a'
+  return 'button'
+})
 </script>
 
 <style>

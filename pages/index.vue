@@ -1,7 +1,7 @@
 <template>
     <div class="pb-24">
         <div class="pt-12">
-            <Landing :imgUrl="imgUrl" :socials="data?.socials" :srcs="srcs" />
+            <Landing :imgUrl="imgUrl" :socials="data?.socials ?? []" :srcs="srcs" />
         </div>
         <div class="px-6 space-y-8">
             <PortfolioComponent />

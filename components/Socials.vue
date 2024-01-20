@@ -1,8 +1,6 @@
 <template>
     <div class="flex mt-4">
-        <VButton v-for="(social, index) in socials" :key="social.name" :href="social.link" :class="[{ 
-            'rounded-l-2xl': index == 0, 
-            'rounded-r-2xl': index == socials.length - 1 }]">
+        <VButton v-for="(social, index) in socials" :key="social.name" :href="social.link">
             <div v-html="social.svg"></div>    
         </VButton>
     </div>
