@@ -7,7 +7,13 @@ export default function useAsyncLoader() {
     return result
   }
 
-  const performAsyncWithResultOrNull = async <T>(promise: Promise<T>, loadingRef: Ref<boolean> | null = null) => {
+  /**
+   * Wraps a promise in a try/catch block and returns null if an error is thrown instead of throwing the error.
+   * @param promise 
+   * @param loadingRef 
+   * @returns Ref<T | null>
+   */
+  const softFetch = async <T>(promise: Promise<T>, loadingRef: Ref<boolean> | null = null) => {
     try {
       if (loadingRef) loadingRef.value = true
       const result = await promise
@@ -20,10 +26,9 @@ export default function useAsyncLoader() {
       return null
     }
   }
-
-
+  
   return {
     performAsync,
-    performAsyncWithResultOrNull,
+    softFetch,
   }
 }

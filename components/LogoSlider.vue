@@ -1,17 +1,16 @@
 <template>
-    <div class="slider md:h-24 h-12 m-auto overflow-hidden relative w-full" v-if="srcs.length">
+    <div class="slider md:h-24 h-12 m-auto overflow-hidden relative w-full md:w-[48rem]" v-if="srcs.length">
         <div class="slide-track" :style="`--img-count: ${srcs.length}; --img-w: ${imgWidth}px`">
             <div class="slide bg-primary-100" v-for="(src, index) in srcs" :key="index">
-                <img :src="src" :height="`${100 / (isMediumScreen ? 1 : 2)}`" :width="imgWidth" alt="" />
+                <img :src="src" height="50" :width="imgWidth" alt="" />
             </div>
             <div class="slide bg-primary-100" v-for="(src, index) in srcs" :key="index">
-                <img :src="src" :height="`${100 / (isMediumScreen ? 1 : 2)}`" :width="imgWidth" alt="" />
+                <img :src="src" height="50" :width="imgWidth" alt="" />
             </div>
         </div>
     </div>
 </template>
 <script setup>
-const isMediumScreen = useMediaQuery('(min-width: 768px)');
 const props = defineProps({
     srcs: {
         type: Array,
@@ -20,7 +19,7 @@ const props = defineProps({
 })
 const srcs = toRef(props, 'srcs', [])
 // get all src links from the template and put them in an array
-const imgWidth = computed(() => 250 / (isMediumScreen.value ? 1 : 2))
+const imgWidth = 125
 </script>
 <style scoped>
 
@@ -53,7 +52,7 @@ const imgWidth = computed(() => 250 / (isMediumScreen.value ? 1 : 2))
 	.slide-track {
         --img-width: var(--img-w, 250);
         --max-img: var(--img-count, 7);
-		animation: scroll 20s linear infinite;
+		animation: scroll 10s linear infinite;
 		display: flex;
 		width: calc(var(--img-width) * calc(var(--max-img) * 2));
 	}

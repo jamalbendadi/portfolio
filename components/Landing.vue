@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen flex flex-col">
-        <div class="grid md:grid-cols-5 h-[80%]">
+        <div class="grid md:grid-cols-5 flex-grow">
             <div class="text-white mx-auto col-span-2 flex flex-col justify-center">
                 <div class="flex flex-col">
                     <div class="my-auto">
@@ -17,7 +17,7 @@
                 </div>
             </ClientOnly>
         </div>
-        <div class="flex-grow flex flex-col justify-center">
+        <div class="flex-shrink flex flex-col justify-center my-12">
             <LogoSlider :srcs="srcs" />
         </div>
     </div>
@@ -46,7 +46,7 @@ const srcs = toRef(props, 'srcs', [])
 const imageRef: Ref<HTMLElement | null> = ref(null)
 const dimensions = { left: 1, top: 1, width: 1, height: 1 }
 
-onMounted(() => {
+onNuxtReady(() => {
     const el = imageRef.value as HTMLElement | null
     if (!el) return
     const { left, top, width, height } = el.getBoundingClientRect() as DOMRect
