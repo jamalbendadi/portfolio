@@ -13,8 +13,8 @@
             }]">
                 <h2 class="text-2xl text-white text-center font-bold mb-3">{{ work.title }}</h2>
 
-                <SwiperCarousel :images="work.image" class="delay-200" />
-                <div v-html="work.description" class="text-white mt-5 delay-400" />
+                <SwiperCarousel :images="work.image"/>
+                <div v-html="work.description" class="text-white mt-5" />
                 <div class="h-[1px] mt-6 mb-6" />
             </div>
         </div>

@@ -2,7 +2,7 @@
     <swiper class="h-[13rem] w-[20rem] lg:h-[27rem] lg:w-[40rem]"
     :effect="'cards'" :grabCursor="true" :modules="modules" :autoplay="{delay: 5000, disableOnInteraction: true}">
         <swiper-slide v-for="(image, index) in images" :key="index" :style="{ backgroundColor: colors[(index + Math.floor(Math.random(colors.length))) % colors.length] }">
-            <img :src="image.url" :alt="image.alt" class="object-contain rounded-lg shadow-lg" v-show="loaded" />
+            <img loading="lazy" :src="image.url" :alt="image.alt" class="object-contain rounded-lg shadow-lg" />
         </swiper-slide>
     </swiper>
 </template>
@@ -19,7 +19,6 @@ const props = defineProps({
         default: () => []
     }
 })
-const loaded = ref(false)
 const images = ref(props.images)
 const modules = ref([EffectCards,Pagination, Autoplay])
 const colors = [
