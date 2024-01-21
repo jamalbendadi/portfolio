@@ -4,7 +4,6 @@
         <span class="section-title font-bold">Loading...</span>
     </div>
     <div v-show="!pending">
-
         <div v-for="(work, index) in  data.works" :key="work.id"
             v-intersection-observer="(i) => onIntersectionObserver(i, work)">
             <div :class="[{

@@ -22,6 +22,19 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      animation: {
+        'fade-in': 'fadeIn 500ms ease-in-out 1',
+      },
+      keyframes: {
+        'fadeIn': {
+          '0%': {
+            opacity: '0',
+          },
+          '100%': {
+            opacity: '1',
+          },
+        },
+      }
     },
   },
   variants: {

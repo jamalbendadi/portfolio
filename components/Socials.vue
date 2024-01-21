@@ -1,7 +1,7 @@
 <template>
     <div class="flex mt-4">
         <VButton v-for="(social, index) in socials" :key="social.name" :href="social.link">
-            <div v-html="social.svg"></div>    
+            <div v-html="social.svg"/>
         </VButton>
     </div>
 </template>

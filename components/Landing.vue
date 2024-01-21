@@ -13,7 +13,8 @@
             </div>
             <ClientOnly>
                 <div ref="imageRef" class="col-span-3 flex flex-shrink" @pointermove="rotateEffect" v-if="isMediumScreen">
-                    <img style="--posXx: 1; --posYy: 1;" :src="imgUrl" class="object-contain" v-if="imgUrl" />
+                    <img style="--posXx: 1; --posYy: 1;" class="object-contain animate-fade-in" 
+                         :src="imgUrl" v-if="imgUrl" @load="loaded = true" v-show="loaded">
                 </div>
             </ClientOnly>
         </div>
@@ -39,7 +40,7 @@ const props = defineProps({
         default: () => []
     }
 })
-
+const loaded = ref(false)
 const imgUrl = toRef(props, 'imgUrl')
 const socials = toRef(props, 'socials', [])
 const srcs = toRef(props, 'srcs', [])
@@ -72,5 +73,15 @@ img {
     --i: var(--deg, 2);
     transition: .3s;
     transform: perspective(500px) rotate3d(var(--yy), var(--xx), 0, calc(var(--i, 1) * -8deg));
+    /*animation: fade-in 500ms ease-in-out 1;*/
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 </style>

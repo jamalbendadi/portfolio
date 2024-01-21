@@ -15,7 +15,7 @@ import { readItems } from '@directus/sdk';
 const { $directus } = useNuxtApp()
 const { fileUrl } = useFiles()
 const asyncLoader = useAsyncLoader() 
-const { pending, data } = await useAsyncData('images', async () => {
+const { pending, data } = await useLazyAsyncData('images', async () => {
     const [landing_img, socials, skillItems] = await Promise.all([
         asyncLoader.softFetch(
             $directus.request(readItems('images', { filter: { name: { _eq: 'landing_page_image' } } }))
