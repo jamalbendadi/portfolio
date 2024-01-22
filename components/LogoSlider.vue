@@ -1,5 +1,5 @@
 <template>
-	<div class="slider h-12 m-auto overflow-hidden relative w-full md:w-[48rem] my-24" v-if="srcs.length">
+	<div class="slider h-12 m-auto overflow-hidden relative w-full md:w-[48rem] my-24 animate-fade-in" v-if="srcs.length">
 		<div class="slide-track bg-primary-100" :style="`--img-count: ${srcs.length}; --img-w: ${IMG_WIDTH}px`">
 			<div class="slide" v-for="(src, index) in srcs" :key="index">
 				<img :src="src" height="50" :width="IMG_WIDTH" alt="" class="animate-fade-in"
@@ -12,6 +12,7 @@
 	</div>
 </template>
 <script setup>
+import { isLoaded } from '~/utils/images';
 const IMG_WIDTH = 125
 const props = defineProps({
 	srcs: {
@@ -23,14 +24,8 @@ const srcs = toRef(props, 'srcs', [])
 const loaded = ref(Array.from({ length: srcs.value.length }, () => false), true) // array of srcs.length false values to track if images are loaded
 
 // check if images are cached
-onMounted(() => {
-	const images = srcs.value.map(src => {
-		const img = new Image()
-		img.src = src
-		return img
-	})
-	Promise.all(images.map(img => new Promise(resolve => img.onload = resolve)))
-		.then(() => loaded.value = Array.from({ length: srcs.value.length }, () => true))
+onMounted(async () => {
+	loaded.value = await isLoaded(srcs.value)
 })
 </script>
 <style scoped>
