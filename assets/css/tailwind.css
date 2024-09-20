@@ -4,6 +4,7 @@
 
 html {
     @apply bg-black;
+    @apply text-white;
 }
 html, body { max-width: 100%; overflow-x: hidden; }
 

@@ -21,6 +21,7 @@ export default function useAsyncLoader() {
       return result
     }
     catch (e) {
+      console.error("API ERROR")
       console.error(e)
       if (loadingRef) loadingRef.value = false
       return null

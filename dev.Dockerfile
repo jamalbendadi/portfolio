@@ -3,6 +3,7 @@ FROM node:18-alpine AS dev
 ENV DIRECTUS_URL_CLIENT http://host.docker.internal:8055
 ENV DIRECTUS_URL_SERVER http://host.docker.internal:8055
 
+
 RUN apk --no-cache add python3 build-base && \
   	ln -sf /usr/bin/python3 /usr/bin/python
 
