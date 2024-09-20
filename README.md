@@ -377,3 +377,5 @@ If you're using a Mac and you have [Alfred](https://www.alfredapp.com/) check ou
 [**Directus Discord**](https://discord.com/invite/directus)
 
 [**Nuxt Discord**](https://discord.com/invite/ps2h6QT)
+
+
