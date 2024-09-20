@@ -8,16 +8,18 @@ export default defineNuxtConfig({
   //     '/posts/**': { static: true },
   //   },
 
+  modules: [// https://pinia.esm.dev
+  '@nuxtjs/tailwindcss', // https://vueuse.org/
+  '@pinia/nuxt', '@vueuse/nuxt', 'nuxt-security'],
+  
+
   css: [],
-
-  modules: [
-    '@nuxtjs/tailwindcss',
-    // https://pinia.esm.dev
-    '@pinia/nuxt',
-    // https://vueuse.org/
-    '@vueuse/nuxt',
-  ],
-
+  security: {
+    tokensPerInterval: 15,
+    interval: 60000,
+    headers: true,
+    throwError: true,
+  },
   runtimeConfig: {
     public: {
       directusUrlClient: process.env.DIRECTUS_URL_CLIENT,
