@@ -44,8 +44,8 @@
 <script setup lang="ts">
 import { createItem } from '@directus/sdk';
 const { $directus } = useNuxtApp()
-const toggledToShow = ref(true)
 const messageToBeSent = ref('')
+const toggledToShow = ref(false)
 const isValid = ref(true)
 const isSendDisabled = ref(false)
 
@@ -66,6 +66,8 @@ async function sendMessage() {
     }
     messageToBeSent.value = '';
 }
+
+setTimeout(() => toggledToShow.value = true, 10000) // show comp after 10 seconds
 </script>
 <style scoped>
 .slide-fade-enter-active {
