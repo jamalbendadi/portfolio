@@ -10,16 +10,10 @@ export default defineNuxtConfig({
 
   modules: [// https://pinia.esm.dev
   '@nuxtjs/tailwindcss', // https://vueuse.org/
-  '@pinia/nuxt', '@vueuse/nuxt', 'nuxt-security'],
+  '@pinia/nuxt', '@vueuse/nuxt'],
   
 
   css: [],
-  security: {
-    tokensPerInterval: 15,
-    interval: 60000,
-    headers: true,
-    throwError: true,
-  },
   runtimeConfig: {
     public: {
       directusUrlClient: process.env.DIRECTUS_URL_CLIENT,
