@@ -67,7 +67,11 @@ async function sendMessage() {
     messageToBeSent.value = '';
 }
 
-setTimeout(() => toggledToShow.value = true, 10000) // show comp after 10 seconds
+setTimeout(() => {
+    if(!isSendDisabled.value){
+        toggledToShow.value = true
+    }
+}, 10000)
 </script>
 <style scoped>
 .slide-fade-enter-active {
