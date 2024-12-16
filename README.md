@@ -55,5 +55,6 @@ docker run --rm -dit --name portfolio -p 3000:3000 \
   -v "$(pwd):/usr/src/app" \
   -w /usr/src/app \
   node:alpine \
-  /bin/sh
+  /bin/sh && \
+docker exec -it portfolio /bin/sh
 ```

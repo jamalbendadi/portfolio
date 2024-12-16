@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       directusUrlServer: process.env.DIRECTUS_URL_SERVER
     },
   },
-
+  
   postcss: {
     plugins: {
       'postcss-import': {},

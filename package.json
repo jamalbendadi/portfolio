@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "nuxi dev",
+        "dev": "nuxi dev --host 0.0.0.0",
         "build": "nuxi build",
         "start": "node .output/server/index.mjs",
         "allupdate": "yarn upgrade-interactive --latest"

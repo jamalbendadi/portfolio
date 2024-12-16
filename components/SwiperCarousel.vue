@@ -3,7 +3,7 @@
     :effect="'cards'" :grabCursor="true" :modules="modules" :autoplay="{delay: 5000, disableOnInteraction: true}">
         <swiper-slide v-for="(image, index) in images" :key="index" :style="{ backgroundColor: colors[(index + Math.floor(Math.random())) % colors.length] }">
             <img loading="lazy" :src="image.url" :alt="image.alt" 
-                 class="object-contain rounded-lg shadow-lg animate-fade-in" v-show="loaded[index]"/>
+                 class="object-contain rounded-lg shadow-lg animate-fade-in h-[12rem] lg:h-[26rem] w-[19rem] lg:w-[39rem]" v-show="loaded[index]"/>
         </swiper-slide>
     </swiper>
 </template>
