@@ -16,3 +16,19 @@ h1.section-title {
 .container {
     @apply max-w-6xl px-6 relative pt-12 pb-24 mx-auto space-y-8
 }
+
+@property --angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 90deg;
+}
+
+@keyframes neon-border {
+    0% {
+        --angle:0deg;
+    }
+
+    100% {
+        --angle: 360deg;
+    }
+}

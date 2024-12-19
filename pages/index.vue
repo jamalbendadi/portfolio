@@ -7,7 +7,7 @@
             <PortfolioComponent />
         </div>
     </div>
-    <div class="fixed bottom-4 right-10 z-50">
+    <div class="fixed bottom-4 right-2 sm:right-10 z-50">
         <MessageMeComponent></MessageMeComponent>
     </div>
 </template>

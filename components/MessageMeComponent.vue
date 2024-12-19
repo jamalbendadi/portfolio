@@ -8,7 +8,7 @@
                             input.</span>
                     </div>
                     <textarea v-on:change="() => isValid = true" v-model="messageToBeSent"
-                        class="mt-auto border border-purple-800 bg-gray-950 text-white" />
+                        class="focus:opacity-100 mt-auto border border-purple-800 bg-gray-950 text-white opacity-50" />
                 </div>
                 <div class="mt-auto flex flex-col">
                     <Tooltip class="ml-auto"
@@ -20,7 +20,7 @@
                                 d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                     </Tooltip>
-                    <button class="btn btn-primary border-purple-800 border mt-1"
+                    <button class="btn btn-primary border-purple-800 border mt-1 opacity-75 hover:opacity-100"
                     v-on:click="sendMessage" 
                     :disabled="isSendDisabled">{{isSendDisabled ? "Thanks!" : "Send"}}</button>
                 </div>
