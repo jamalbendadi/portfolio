@@ -29,7 +29,7 @@ const [{ fileUrl }, { softFetch }] = [useFiles(), useAsyncLoader()]
 
 const { pending, data } = await useLazyAsyncData('works', async () => {
     const items = await softFetch($directus.request(readItems('works', { fields: ['*', 'image.images_id.name', 'image.images_id.image'] })))
-    items.forEach(work => {
+    items.reverse().forEach(work => {
         work.image = work.image.map(i => ({ url: fileUrl(i.images_id.image), alt: i.images_id.description }))
         work.isVisible = ref(false)
     })
